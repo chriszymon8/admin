@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — Gentry Timepieces</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" href="/FinalProject/assets/logo/logo.jpg">
+</head>
+<body class="bg-gray-900 text-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-gray-800 p-8 rounded-lg w-full max-w-md">
+    <h2 class="text-2xl font-semibold mb-4">Admin Login</h2>
+    <form id="adminLoginForm" class="space-y-4">
+      <input type="email" id="adminEmail" placeholder="Email" class="w-full p-3 rounded bg-gray-900" required>
+      <input type="password" id="adminPassword" placeholder="Password" class="w-full p-3 rounded bg-gray-900" required>
+      <button type="submit" class="w-full py-3 bg-amber-400 text-black font-semibold rounded">Login</button>
+    </form>
+    <div id="loginMsg" class="mt-4 text-sm text-red-400"></div>
+  </div>
+
+  <script src="./admin.js"></script>
+</body>
+</html>

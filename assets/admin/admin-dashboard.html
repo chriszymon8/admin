@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Gentry Timepieces</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" href="/FinalProject/assets/logo/logo.jpg">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+
+<header class="bg-gray-800 p-4 flex justify-between items-center">
+  <h1 class="font-semibold text-xl">Admin Dashboard</h1>
+  <button id="logoutBtn" class="px-4 py-2 bg-red-600 rounded">Logout</button>
+</header>
+
+<main class="p-6 max-w-7xl mx-auto space-y-8">
+
+  <!-- Users Section -->
+  <section>
+    <h2 class="text-xl font-semibold mb-2">Users</h2>
+    <table class="w-full text-left bg-gray-800 rounded-lg p-2">
+      <thead>
+        <tr>
+          <th class="p-2">ID</th>
+          <th class="p-2">Name</th>
+          <th class="p-2">Email</th>
+          <th class="p-2">Blocked</th>
+          <th class="p-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="usersTable"></tbody>
+    </table>
+  </section>
+
+  <!-- Products Section -->
+  <section>
+    <h2 class="text-xl font-semibold mb-2">Products</h2>
+
+    <form id="addProductForm" class="mb-4 grid grid-cols-1 md:grid-cols-6 gap-2">
+      <input type="text" id="productId" placeholder="Product ID" class="p-2 rounded bg-gray-900" required>
+      <input type="text" id="productBrand" placeholder="Brand" class="p-2 rounded bg-gray-900" required>
+      <input type="text" id="productName" placeholder="Name" class="p-2 rounded bg-gray-900" required>
+      <input type="number" id="productPrice" placeholder="Price" class="p-2 rounded bg-gray-900" required>
+      
+      <!-- Main and additional images -->
+      <input type="text" id="productImgMain" placeholder="Main Image URL" class="p-2 rounded bg-gray-900" required>
+      <input type="text" id="productImg1" placeholder="Image 1 URL" class="p-2 rounded bg-gray-900" required>
+      <input type="text" id="productImg2" placeholder="Image 2 URL" class="p-2 rounded bg-gray-900" required>
+      <input type="text" id="productImg3" placeholder="Image 3 URL" class="p-2 rounded bg-gray-900" required>
+
+      <!-- Description -->
+      <textarea id="productDesc" placeholder="Description" class="p-2 rounded bg-gray-900 col-span-full"></textarea>
+
+      <input type="number" id="productStock" placeholder="Stock" class="p-2 rounded bg-gray-900" required>
+
+      <button type="submit" class="col-span-full py-2 bg-amber-400 text-black rounded">
+        Add Product
+      </button>
+    </form>
+
+    <table class="w-full text-left bg-gray-800 rounded-lg p-2">
+      <thead>
+        <tr>
+          <th class="p-2">ID</th>
+          <th class="p-2">Brand</th>
+          <th class="p-2">Name</th>
+          <th class="p-2">Price</th>
+          <th class="p-2">Stock</th>
+          <th class="p-2">Image</th>
+          <th class="p-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="productsTable"></tbody>
+    </table>
+  </section>
+
+  <!-- Orders Section -->
+  <section>
+    <h2 class="text-xl font-semibold mb-2">Orders</h2>
+    <canvas id="ordersChart" class="bg-gray-800 rounded-lg p-4"></canvas>
+    <table class="w-full text-left bg-gray-800 rounded-lg p-2 mt-4">
+      <thead>
+        <tr>
+          <th class="p-2">Order ID</th>
+          <th class="p-2">User Email</th>
+          <th class="p-2">Items</th>
+          <th class="p-2">Total</th>
+        </tr>
+      </thead>
+      <tbody id="ordersTable"></tbody>
+    </table>
+  </section>
+
+</main>
+
+<script src="./admin.js"></script>
+<script src="./orders.js"></script>
+</body>
+</html>
