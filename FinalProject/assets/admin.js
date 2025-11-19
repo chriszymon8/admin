@@ -101,8 +101,9 @@ async function renderProducts(products = []) {
 
     const img = document.createElement("img");
     img.className = "w-16 h-16 object-contain";
-    img.src = p.img || "assets/watches/AP1.avif";
+    img.src = p.img ? `/${p.img.replace(/^\/?/, '')}` : "/assets/watches/placeholder.avif";
     tdImg.appendChild(img);
+
 
 
     const tdActions = document.createElement("td");
