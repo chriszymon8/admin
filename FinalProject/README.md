@@ -14,3 +14,9 @@ command:
     password:
     admin@gentry.com
     admin123
+
+
+    const img = document.createElement("img");
+    img.className = "w-16 h-16 object-contain";
+    tdImg.appendChild(img);
+    tr.appendChild(tdImg);
