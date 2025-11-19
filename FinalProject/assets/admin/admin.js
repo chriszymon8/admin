@@ -14,7 +14,7 @@ if (loginForm) {
 
     if (email === adminEmail && password === adminPassword) {
       localStorage.setItem("gentry_admin", "true");
-      window.location.href = "/assets/admin/admin-dashboard.html";
+      window.location.href = "/admin-dashboard.html";
     } else {
       document.getElementById("loginMsg").textContent = "Invalid credentials";
     }
@@ -23,12 +23,12 @@ if (loginForm) {
 
 const mainEl = document.querySelector("main");
 if (mainEl && localStorage.getItem("gentry_admin") !== "true") {
-  window.location.href = "/assets/admin/admin-login.html";
+  window.location.href = "/admin-login.html";
 }
 
 document.getElementById("logoutBtn")?.addEventListener("click", () => {
   localStorage.removeItem("gentry_admin");
-  window.location.href = "/assets/admin/admin-login.html";
+  window.location.href = "/admin-login.html";
 });
 
 // FETCH HELPER
