@@ -101,7 +101,7 @@ async function renderProducts(products = []) {
 
     const img = document.createElement("img");
     img.className = "w-16 h-16 object-contain";
-    img.src = p.img || "assets/watches/placeholder.avif"; // fallback kung walang image
+    img.src = p.img || "assets/watches/AP1.avif";
     tdImg.appendChild(img);
 
 
