@@ -1,8 +1,8 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/", "destination": "/assets/admin/admin-login.html" },
-    { "source": "/admin-login", "destination": "/assets/admin/admin-login.html" },
-    { "source": "/admin-dashboard", "destination": "/assets/admin/admin-dashboard.html" }
+    { "source": "/", "destination": "admin-login.html" },
+    { "source": "admin-login", "destination": "admin-login.html" },
+    { "source": "/admin-dashboard", "destination": "admin-dashboard.html" }
   ]
 }
