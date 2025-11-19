@@ -101,15 +101,10 @@ async function renderProducts(products = []) {
 
     const img = document.createElement("img");
     img.className = "w-16 h-16 object-contain";
-
-    // Check if img is a full URL or relative path
-    if (p.img && (p.img.startsWith("http://") || p.img.startsWith("https://"))) {
-        img.src = p.img; // use full URL as-is
-    } else {
-        img.src = p.img ? `/${p.img}` : "/assets/watches/placeholder.avif";
-    }
-
+    img.src = p.img ? `/${p.img}` : "/assets/watches/placeholder.avif"; // absolute path
     tdImg.appendChild(img);
+
+
 
 
 
