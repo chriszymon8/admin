@@ -14,7 +14,7 @@ if (loginForm) {
 
     if (email === adminEmail && password === adminPassword) {
       localStorage.setItem("gentry_admin", "true");
-      window.location.href = "./admin-dashboard.html";
+      window.location.href = "/assets/admin/admin-dashboard.html";
     } else {
       document.getElementById("loginMsg").textContent = "Invalid credentials";
     }
@@ -23,12 +23,12 @@ if (loginForm) {
 
 const mainEl = document.querySelector("main");
 if (mainEl && localStorage.getItem("gentry_admin") !== "true") {
-  window.location.href = "./admin-login.html";
+  window.location.href = "/assets/admin/admin-login.html";
 }
 
 document.getElementById("logoutBtn")?.addEventListener("click", () => {
   localStorage.removeItem("gentry_admin");
-  window.location.href = "./admin-login.html";
+  window.location.href = "/assets/admin/admin-login.html";
 });
 
 // FETCH HELPER
@@ -89,7 +89,7 @@ async function renderProducts(products = []) {
 
   products.forEach(p => {
     const tr = document.createElement("tr");
-    ["id", "brand", "name", "price", "stock"].forEach(key => {
+    ["id", "brand", "name", "price", "quantity"].forEach(key => {
       const td = document.createElement("td");
       td.className = "p-2";
       td.textContent = p[key];
@@ -142,9 +142,10 @@ if (addProductForm) {
       document.getElementById("productImg2").value.trim(),
       document.getElementById("productImg3").value.trim()
     ],
-    stock: document.getElementById("productStock").value === "1",
+    quantity: Number(document.getElementById("productQuantity").value),
     desc: document.getElementById("productDesc")?.value.trim() || ""
   };
+
 
     await fetchData(`${BASE_URL}/api/products`, {
       method: "POST",
@@ -158,7 +159,6 @@ if (addProductForm) {
 
 // EDIT PRODUCT MODAL
 function openEditModal(product) {
-  // Remove previous modal if exists
   const oldModal = document.getElementById("editModal");
   if (oldModal) oldModal.remove();
 
@@ -166,53 +166,47 @@ function openEditModal(product) {
   modal.id = "editModal";
   modal.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
 
-  // Modal content container
   const container = document.createElement("div");
   container.className = "bg-gray-800 p-6 rounded-lg w-96 space-y-4";
 
-  // Title
   const title = document.createElement("h2");
   title.className = "text-lg font-semibold";
   title.textContent = "Edit Product";
   container.appendChild(title);
 
-  // Brand input
   const editBrand = document.createElement("input");
-  editBrand.id = "editBrand";
   editBrand.type = "text";
   editBrand.className = "w-full p-2 rounded bg-gray-900";
   editBrand.value = product.brand;
   container.appendChild(editBrand);
 
-  // Name input
   const editName = document.createElement("input");
-  editName.id = "editName";
   editName.type = "text";
   editName.className = "w-full p-2 rounded bg-gray-900";
   editName.value = product.name;
   container.appendChild(editName);
 
-  // Price input
   const editPrice = document.createElement("input");
-  editPrice.id = "editPrice";
   editPrice.type = "number";
   editPrice.className = "w-full p-2 rounded bg-gray-900";
   editPrice.value = product.price;
   container.appendChild(editPrice);
 
-  // Image input
   const editImg = document.createElement("input");
-  editImg.id = "editImg";
   editImg.type = "text";
   editImg.className = "w-full p-2 rounded bg-gray-900";
   editImg.value = product.img;
   container.appendChild(editImg);
 
-  // Stock select
+  const editQuantity = document.createElement("input");
+  editQuantity.type = "number";
+  editQuantity.className = "w-full p-2 rounded bg-gray-900";
+  editQuantity.value = product.quantity;
+  container.appendChild(editQuantity);
+
   const editStock = document.createElement("select");
-  editStock.id = "editStock";
   editStock.className = "w-full p-2 rounded bg-gray-900";
-  
+
   const optionTrue = document.createElement("option");
   optionTrue.value = "true";
   optionTrue.textContent = "In Stock";
@@ -227,18 +221,15 @@ function openEditModal(product) {
   editStock.appendChild(optionFalse);
   container.appendChild(editStock);
 
-  // Buttons container
   const btnContainer = document.createElement("div");
   btnContainer.className = "flex justify-end gap-2";
 
   const cancelBtn = document.createElement("button");
-  cancelBtn.id = "cancelEdit";
   cancelBtn.className = "px-4 py-2 bg-gray-600 rounded";
   cancelBtn.textContent = "Cancel";
   cancelBtn.addEventListener("click", () => modal.remove());
 
   const saveBtn = document.createElement("button");
-  saveBtn.id = "saveEdit";
   saveBtn.className = "px-4 py-2 bg-green-500 rounded";
   saveBtn.textContent = "Save";
   saveBtn.addEventListener("click", async () => {
@@ -247,14 +238,16 @@ function openEditModal(product) {
       name: editName.value,
       price: Number(editPrice.value),
       img: editImg.value,
+      quantity: Number(editQuantity.value),
       stock: editStock.value === "true"
     };
 
-    await fetchData(`${BASE_URL}/api/products/${product.id}`, {
+    await fetch(`${BASE_URL}/api/products/${product.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedProduct)
     });
+
     modal.remove();
   });
 
@@ -265,6 +258,7 @@ function openEditModal(product) {
   modal.appendChild(container);
   document.body.appendChild(modal);
 }
+
 
 // RENDER ORDERS
 async function renderOrders(orders = []) {
