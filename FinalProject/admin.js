@@ -51,11 +51,16 @@ async function renderUsers(users = []) {
   users.forEach(u => {
     const tr = document.createElement("tr");
     ["id", "name", "email", "blocked"].forEach(key => {
-      const td = document.createElement("td");
-      td.className = "p-2";
+    const td = document.createElement("td");
+    td.className = "p-2";
+    if (key === "blocked") {
+      // Swap true/false for display
+      td.textContent = u[key] ? "Blocked" : "Active";
+    } else {
       td.textContent = u[key];
-      tr.appendChild(td);
-    });
+    }
+    tr.appendChild(td);
+  });
 
     const tdActions = document.createElement("td");
     tdActions.className = "p-2 flex gap-2";
